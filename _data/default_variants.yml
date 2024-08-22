@@ -17,7 +17,7 @@ extractors:
   tap-aha: airbyte
   tap-airbyte-wrapper: meltanolabs
   tap-aircall: ticketswap
-  tap-airtable: goes-funky
+  tap-airtable: tomasvotava
   tap-alpha-vantage: airbyte
   tap-amazon-ads-dsp: singer-io
   tap-amazon-advertising: dbt-labs
@@ -62,6 +62,7 @@ extractors:
   tap-bigquery: anelendata
   tap-billwerk: bi-media
   tap-bing-ads: singer-io
+  tap-bitbucket: humblebeck
   tap-bitso: edgarrmondragon
   tap-bling-erp: muriloo
   tap-bls: frasermarlow
@@ -73,6 +74,7 @@ extractors:
   tap-brillium: manuelapilongo
   tap-bronto: dbt-labs
   tap-bynder: radico
+  tap-calendly: afonsodiniz
   tap-callrail: airbyte
   tap-campaign-monitor: singer-io
   tap-canvas: mwcooley99
@@ -90,7 +92,6 @@ extractors:
   tap-cin7: hotgluexyz
   tap-circle-ci: sisudata
   tap-clarabridge: pathlight
-  tap-clickcast: datateer
   tap-clickhouse: akurdyukov
   tap-clickup: autoidm
   tap-clientsuccess: antiny
@@ -181,6 +182,7 @@ extractors:
   tap-fishbowl: hotgluexyz
   tap-five9: pathlight
   tap-fixerio: singer-io
+  tap-fleetio: fleetio
   tap-flexport: airbyte
   tap-flipkart: meltanolabs
   tap-followupboss: hotgluexyz
@@ -211,7 +213,7 @@ extractors:
   tap-gmail-csv: food-spotter
   tap-gnews: airbyte
   tap-gocardless: airbyte
-  tap-gohighlevel: hotgluexyz
+  tap-gohighlevel: meltanolabs
   tap-gong: symon-ai
   tap-google-analytics: meltanolabs
   tap-google-directory: airbyte
@@ -236,6 +238,7 @@ extractors:
   tap-hotjar: epoch8
   tap-hubplanner: airbyte
   tap-hubspot: singer-io
+  tap-iceberg: shaped-ai
   tap-idealo-click-report: horze-international
   tap-ilevel: singer-io
   tap-immuta: immuta
@@ -261,9 +264,9 @@ extractors:
   tap-kafka: transferwise
   tap-kanbanize: n8sty
   tap-keap: hotgluexyz
+  tap-kiotviet: chienazazaz
   tap-klarna: airbyte
   tap-klaviyo: meltanolabs
-  tap-krow: datateer
   tap-kustomer: meltanolabs
   tap-kwanko: uptilab2
   tap-kyriba: airbyte
@@ -319,6 +322,11 @@ extractors:
   tap-moosend: hotgluexyz
   tap-ms-graph: slalom-consulting
   tap-ms-teams: singer-io
+  tap-msaccess: matatika
+  tap-msaccess-anywhere: matatika
+  tap-msaccess-azure: matatika
+  tap-msaccess-http: matatika
+  tap-msaccess-s3: matatika
   tap-mssql: wintersrd
   tap-my-hours: airbyte
   tap-mysql: transferwise
@@ -374,6 +382,7 @@ extractors:
   tap-planfix: epoch8
   tap-platformpurple: singer-io
   tap-plausible: airbyte
+  tap-playstore: haleemur
   tap-plentymarkets: hotgluexyz
   tap-podbean: slalom-consulting
   tap-pokeapi: airbyte
@@ -518,7 +527,7 @@ extractors:
   tap-tradera: kgpayne
   tap-travefy: hotgluexyz
   tap-treez: mashey
-  tap-trello: singer-io
+  tap-trello: matatika
   tap-trustpilot: dbt-labs
   tap-trustrace: icebug
   tap-tvmaze-schedule: airbyte
@@ -605,8 +614,9 @@ loaders:
   target-cassandra: coeff
   target-chromadb: meltanolabs
   target-clickhouse: shaped-ai
-  target-csv: hotgluexyz
+  target-csv: meltanolabs
   target-datadotworld: datadotworld
+  target-db2: infostrux
   target-duckdb: jwills
   target-elasticsearch: dtmirizzi
   target-gcs: datateer
@@ -626,7 +636,7 @@ loaders:
   target-parquet: automattic
   target-pinecone: meltanolabs
   target-postgres: meltanolabs
-  target-redshift: transferwise
+  target-redshift: ticketswap
   target-s3: crowemi
   target-s3-avro: faumel
   target-s3-csv: transferwise
@@ -673,7 +683,6 @@ utilities:
   dbt-artifacts: matatika
   dbt-athena: dbt-athena
   dbt-bigquery: dbt-labs
-  dbt-dry-run: autotraderuk
   dbt-duckdb: jwills
   dbt-osmosis: z3z1ma
   dbt-postgres: dbt-labs

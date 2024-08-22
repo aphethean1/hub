@@ -18,6 +18,10 @@ ae-nv:
   label: ae-nv
   name: AE
   url: https://github.com/AE-nv
+afonsodiniz:
+  label: Afonso Diniz
+  name: afonsodiniz
+  url: https://github.com/afonsodiniz
 ahuynh3:
   label: ahuynh3
   name: ahuynh3
@@ -102,10 +106,6 @@ automattic:
   label: Automattic
   name: automattic
   url: https://github.com/Automattic
-autotraderuk:
-  label: Auto Trader
-  name: autotraderuk
-  url: https://github.com/autotraderuk
 b-ryan:
   label: Buck Ryan
   name: b-ryan
@@ -170,6 +170,10 @@ checkr:
   label: Checkr
   name: checkr
   url: https://github.com/checkr
+chienazazaz:
+  label: chienazazaz
+  name: chienazazaz
+  url: https://github.com/chienazazaz
 chillu:
   label: Ingo Schommer
   name: chillu
@@ -413,6 +417,10 @@ flash716:
   label: Jeff Gordon
   name: flash716
   url: https://github.com/flash716
+fleetio:
+  label: fleetio
+  name: fleetio
+  url: https://github.com/fleetio
 flopotok:
   label: Flo
   name: flopotok
@@ -489,6 +497,10 @@ haaspt:
   label: Patrick Tyler Haas
   name: haaspt
   url: https://github.com/haaspt
+haleemur:
+  label: haleemur
+  name: haleemur
+  url: https://github.com/haleemur
 harrystech:
   label: harrystech
   name: harrystech
@@ -517,6 +529,10 @@ hugo4400:
   label: uptilab2
   name: hugo4400
   url: https://github.com/uptilab2
+humblebeck:
+  label: Bohdan Stadnyk
+  name: humblebeck
+  url: https://github.com/HumbleBeck
 icebug:
   label: icebug
   name: icebug
@@ -537,6 +553,10 @@ immuta:
   label: Immuta, Inc.
   name: immuta
   url: http://www.immuta.com/
+infostrux:
+  label: Infostrux Solutions
+  name: infostrux
+  url: https://www.infostrux.com/
 integress-inc:
   label: Integress Inc
   name: integress-inc
@@ -1161,6 +1181,10 @@ tmonks:
   label: Tom Monks
   name: tmonks
   url: https://github.com/tmonks
+tomasvotava:
+  label: Tomas Votava
+  name: tomasvotava
+  url: https://github.com/tomasvotava
 tomekzbrozek:
   label: Tomek Zbrozek
   name: tomekzbrozek

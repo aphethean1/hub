@@ -7,11 +7,11 @@
       placeholder="Search 600+ connectors and tools"
       class="search-bar text-black text-sm bg-transparent pl-4 border-solid border-blue border rounded-[9999px] py-1.5 w-full placeholder:text-par placeholder:font-light font-ibm focus-visible:outline-0"
       ref="searchBar"
+      :autofocus="!this.$route.hash"
       :value="search"
       @input="search = $event.target.value"
       @focus="searchFocused = true"
-      @blur="searchFocused = true"
-      v-focus="searchFocused"
+      @blur="searchFocused = false"
     />
     <div class="absolute right-2 top-1/4">
       <svg
@@ -39,7 +39,7 @@
       leave-to-class="scale-y-0 -translate-y-1/2 opacity-0"
     >
       <div
-        class="absolute z-40 grid w-full grid-cols-1 py-2 mx-auto mt-12 overflow-scroll shadow-lg max-h-96 justify-self-center grid-span-1 bg-slate-100"
+        class="absolute z-40 grid w-full grid-cols-1 py-2 mx-auto mt-12 overflow-y-auto shadow-lg max-h-96 justify-self-center grid-span-1 bg-slate-100"
         v-if="search != '' && (searchFocused || hoveringOnSearchOptions)"
       >
         <div
@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       search: "",
-      searchFocused: false,
+      searchFocused: true,
       hoveringOnSearchOptions: false,
     };
   },
@@ -137,10 +137,12 @@ export default {
               plugin.node.label,
               plugin.node.keywords?.join(" "),
             ];
-            return pluginTextFields
-              .join(" ")
+            const searchIn = pluginTextFields.join(" ").toLowerCase();
+            return this.search
               .toLowerCase()
-              .includes(this.search.toLowerCase().trim());
+              .trim()
+              .split(" ")
+              .every((searchTerm) => searchIn.includes(searchTerm));
           })
           .sort((a, b) => {
             // First compare by pluginType

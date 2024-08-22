@@ -25,18 +25,34 @@ settings:
   kind: password
   label: API Key
   name: api_key
+  sensitive: true
 - description: Api key id for auth key authorization
   kind: password
   label: API Key ID
   name: api_key_id
+  sensitive: true
+- description: Maximum number of rows in each batch.
+  kind: integer
+  label: Batch Size Rows
+  name: batch_size_rows
 - description: Bearer token for bearer authorization
   kind: password
   label: Bearer Token
   name: bearer_token
+  sensitive: true
 - description: Encoded api key for auth key authorization
   kind: password
   label: Encoded API Key
   name: encoded_api_key
+  sensitive: true
+- description: 'One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization'
+  kind: array
+  label: Faker Config Locale
+  name: faker_config.locale
+- description: 'Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator'
+  kind: string
+  label: Faker Config Seed
+  name: faker_config.seed
 - description: "'True' to enable schema flattening and automatically expand nested
     properties."
   kind: boolean
@@ -112,11 +128,22 @@ settings:
   kind: password
   label: Password
   name: password
+  sensitive: true
 - description: Port use to connect to elasticsearch
   kind: integer
   label: Port
   name: port
   value: 9200
+- description: Request timeout in seconds
+  kind: integer
+  label: Request Timeout
+  name: request_timeout
+  value: 10
+- description: Retry failed requests on timeout
+  kind: boolean
+  label: Retry On Timeout
+  name: retry_on_timeout
+  value: true
 - description: http scheme used for connecting to elasticsearch
   kind: string
   label: Scheme
@@ -139,6 +166,11 @@ settings:
   kind: string
   label: Username
   name: username
+- description: Whether to validate the schema of the incoming streams.
+  kind: boolean
+  label: Validate Records
+  name: validate_records
+  value: true
 settings_group_validation:
 - - host
   - port
