@@ -73,6 +73,7 @@ extractors:
   tap-brightpearl: zookal
   tap-brillium: manuelapilongo
   tap-bronto: dbt-labs
+  tap-businessmap: n8sty
   tap-bynder: radico
   tap-calendly: afonsodiniz
   tap-callrail: airbyte
@@ -176,6 +177,7 @@ extractors:
   tap-fastbill: airbyte
   tap-fastly: splitio
   tap-fauna: airbyte
+  tap-fedidb: edgarrmondragon
   tap-feed: jawats
   tap-file: airbyte
   tap-firebolt: airbyte
@@ -187,6 +189,7 @@ extractors:
   tap-flipkart: meltanolabs
   tap-followupboss: hotgluexyz
   tap-forecast: uptilab2
+  tap-formbricks: emilklindt
   tap-formstack: hotgluexyz
   tap-fortnox: hotgluexyz
   tap-freshbooks: hotgluexyz
@@ -200,6 +203,7 @@ extractors:
   tap-fullstory: singer-io
   tap-ga4: meltanolabs
   tap-gainsightpx: widen
+  tap-geekbot: edgarrmondragon
   tap-genesys: airbyte
   tap-getlago: airbyte
   tap-getpocket: evelte
@@ -219,7 +223,7 @@ extractors:
   tap-google-directory: airbyte
   tap-google-pagespeed-insights: airbyte
   tap-google-play: edgarrmondragon
-  tap-google-search-console: singer-io
+  tap-google-search-console: meltanolabs
   tap-google-sheets: matatika
   tap-google-webfonts: airbyte
   tap-google-workspace-admin-reports: airbyte
@@ -436,7 +440,7 @@ extractors:
   tap-rocket-chat: airbyte
   tap-rockgympro: cinchio
   tap-s3: airbyte
-  tap-s3-csv: transferwise
+  tap-s3-csv: s7clarke10
   tap-saasoptics: datarts-tech
   tap-sailthru: singer-io
   tap-salesforce: meltanolabs
@@ -487,10 +491,12 @@ extractors:
   tap-spacex-api: airbyte
   tap-spotify: matatika
   tap-spreadsheets-anywhere: ets
+  tap-sproutsocial: ella6882
   tap-square: hotgluexyz
   tap-ssb-klass: storebrand
   tap-stackexchange: meltanolabs
   tap-stackoverflow-sampledata: buzzcutnorman
+  tap-staffwise: chartica
   tap-stamped: hotgluexyz
   tap-starshipit: zookal
   tap-statuspage: airbyte
@@ -629,7 +635,7 @@ loaders:
   target-magentobi: singer-io
   target-miso: misoai
   target-mongodb: hotgluexyz
-  target-mssql: storebrand
+  target-mssql: meltanolabs
   target-mysql: thkwag
   target-oracle: radbrt
   target-pardot: anelendata

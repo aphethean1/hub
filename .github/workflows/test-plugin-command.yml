@@ -78,21 +78,24 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        # https://github.com/actions/setup-python
-        python-version: 3.9
-        cache: 'pip'
+        python-version: "3.10"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        version: ">=0.4.30"
 
     - name: Install plugin
       id: plugin-install
       run: |
-        pipx install ${{ env.PIP_URL }} 2>&1 | tee install-output.txt
-        echo "::set-output name=failed::${PIPESTATUS[0]}"
+        uv tool install ${{ env.PIP_URL }} 2>&1 | tee install-output.txt
+        echo "failed=${PIPESTATUS[0]}" >> $GITHUB_ENV
 
     - name: Create installation failure log
       if: steps.plugin-install.outputs.failed == '1'
       run: |
         echo "JOB_OUTPUT<<EOF" >> $GITHUB_ENV
-        echo "melty-bot % pipx install ${{ env.PIP_URL }}" >> $GITHUB_ENV
+        echo "melty-bot % uv tool install ${{ env.PIP_URL }}" >> $GITHUB_ENV
         cat install-output.txt >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
 

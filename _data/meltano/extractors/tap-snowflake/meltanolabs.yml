@@ -31,7 +31,7 @@ settings:
   label: Batch Config Encoding Compression
   name: batch_config.encoding.compression
   options:
-  - label: Gzip
+  - label: GZIP
     value: gzip
   - label: None
     value: none
@@ -40,7 +40,7 @@ settings:
   label: Batch Config Encoding Format
   name: batch_config.encoding.format
   options:
-  - label: Jsonl
+  - label: JSONL
     value: jsonl
   - label: Parquet
     value: parquet
@@ -73,10 +73,29 @@ settings:
   kind: integer
   label: Flattening Max Depth
   name: flattening_max_depth
-- description: The password for your Snowflake user.
+- description: The password for your Snowflake user. One of [`password`, `private_key`,
+    `private_key_path`] is required.
   kind: password
   label: Password
   name: password
+  sensitive: true
+- description: The private key is used to connect to snowflake. One of [`password`,
+    `private_key`, `private_key_path`] is required.
+  kind: password
+  label: Private Key
+  name: private_key
+  sensitive: true
+- description: The passprhase used to protect the private key
+  kind: password
+  label: Private Key Passphrase
+  name: private_key_passphrase
+  sensitive: true
+- description: Path to where the private key is stored. The private key is used to
+    connect to snowflake. One of [`password`, `private_key`, `private_key_path`] is
+    required.
+  kind: password
+  label: Private Key Path
+  name: private_key_path
   sensitive: true
 - description: The initial role for the session.
   kind: string
@@ -98,10 +117,17 @@ settings:
 - description: 'An array of the table names that you want to sync. The table names
     should be fully qualified, including schema and table name. NOTE: this limits
     discovery to the tables specified, for performance reasons. Do not specify `tables`
-    if you intend to discover the entire available catalog.'
+    if you intend to discover the entire available catalog. See readme for more details
+    on the tables configuration parameter.'
   kind: array
   label: Tables
   name: tables
+- description: If authentication should be done using SSO (via external browser).
+    See SSO browser authentication.
+  kind: boolean
+  label: Use Browser Authentication
+  name: use_browser_authentication
+  value: false
 - description: The login name for your Snowflake user.
   kind: string
   label: User

@@ -1,0 +1,117 @@
+name: Metadata Extract - Loaders
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The environment to run the workflow in'
+        required: true
+        type: choice
+        default: 'preview'
+        options:
+          - 'preview'
+          - 'production'
+  schedule:
+    - cron: '0 9 * * 1' # Run at midnight UTC on Mondays
+
+jobs:
+  get_variants_list:
+    runs-on: ubuntu-latest
+    outputs:
+      sdk_loaders_matrix: ${{ steps.setmatrix_sdk_loaders.outputs.sdk_loaders_matrix }}
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: ">=0.4.30"
+
+      - name: Install hub-utils
+        run: uv tool install git+https://github.com/meltano/hub-utils.git@main
+
+      - name: Get Variants List - SDK Loaders
+        id: get-variants-list-sdk-loaders
+        run: echo "VARIANTS_SDK_LOADERS=$(hub-utils get-variant-names $(pwd) --plugin-type=loaders --metadata-type=sdk)" >> $GITHUB_OUTPUT
+
+      - name: Set Dynamic Matrix - SDK Loaders
+        id: setmatrix_sdk_loaders
+        run: |
+           matrixStringifiedObject="{\"include\": ${{ steps.get-variants-list-sdk-loaders.outputs.VARIANTS_SDK_LOADERS }}}"
+           echo "sdk_loaders_matrix=$matrixStringifiedObject" >> $GITHUB_OUTPUT
+
+  metadata_extract_sdk_loaders:
+    name: SDK Loaders - Metadata Extract
+    needs: get_variants_list
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || github.event_name == 'schedule' && 'production' || 'preview' }}
+    env:
+      AWS_S3_BUCKET: "${{secrets.HUB_METADATA_S3_BUCKET }}"
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.get_variants_list.outputs.sdk_loaders_matrix) }}
+    permissions:
+      id-token: write # This is required for requesting the JWT
+    steps:
+    - uses: actions/checkout@v4.2.2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4.0.3
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-west-2
+        role-session-name: "GitHubActions"
+
+    - uses: astral-sh/setup-uv@v5
+      with:
+        version: ">=0.4.30"
+
+    - name: Install hub-utils
+      run: uv tool install git+https://github.com/meltano/hub-utils.git@main
+
+    # This starts the attempts to install and extract metadata. Since we don't
+    # know what python versions are accepted we start with the latest and continue
+    # decreasing until we have a success or run out of python versions to attempt.
+    - name: Install Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: |
+          3.13
+          3.12
+          3.11
+          3.10
+          3.9
+          3.8
+
+    - name: Extract Metadata (3.13)
+      id: extract_313
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.13
+      continue-on-error: true
+
+    - name: Extract Metadata (3.12)
+      if: always() && (steps.extract_313.outcome == 'failure')
+      id: extract_312
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.12
+      continue-on-error: true
+
+    - name: Extract Metadata (3.11)
+      if: always() && (steps.extract_312.outcome == 'failure')
+      id: extract_311
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.11
+      continue-on-error: true
+
+    - name: Extract Metadata (3.10)
+      if: always() && (steps.extract_311.outcome == 'failure')
+      id: extract_310
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.10
+      continue-on-error: true
+
+    - name: Extract Metadata (3.9)
+      if: always() && (steps.extract_310.outcome == 'failure')
+      id: extract_39
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.9
+      continue-on-error: true
+
+    - name: Extract Metadata (3.8)
+      if: always() && (steps.extract_39.outcome == 'failure')
+      id: extract_38
+      run: hub-utils extract-sdk-metadata-to-s3 "/home/runner/work/hub/hub/_data/meltano/${{ matrix.plugin-name }}" $(pwd)/extract_data --python=python3.8

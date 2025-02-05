@@ -17,7 +17,7 @@ logo_url: /assets/logos/extractors/github.png
 maintenance_status: active
 name: tap-github
 namespace: tap_github
-pip_url: git+https://github.com/MeltanoLabs/tap-github.git
+pip_url: meltanolabs-tap-github
 quality: gold
 repo: https://github.com/MeltanoLabs/tap-github
 select:
@@ -29,6 +29,12 @@ settings:
   kind: array
   label: Additional Auth Tokens
   name: additional_auth_tokens
+- description: List of GitHub App credentials to authenticate with. Each credential
+    can be constructed by combining an App ID and App private key into the format
+    `:app_id:;;-----BEGIN RSA PRIVATE KEY----- _YOUR_P_KEY_ -----END RSA PRIVATE KEY-----`.
+  kind: array
+  label: Auth App Keys
+  name: auth_app_keys
 - description: GitHub token to authenticate with.
   kind: password
   label: Auth Token
@@ -36,36 +42,50 @@ settings:
   sensitive: true
 - description: Compression format to use for batch files.
   kind: options
-  label: Batch Config Encoding Compression
+  label: Batch Compression Format
   name: batch_config.encoding.compression
   options:
-  - label: Gzip
+  - label: GZIP
     value: gzip
   - label: None
     value: none
 - description: Format to use for batch files.
   kind: options
-  label: Batch Config Encoding Format
+  label: Batch Encoding Format
   name: batch_config.encoding.format
   options:
-  - label: Jsonl
+  - label: JSONL
     value: jsonl
+  - label: Parquet
+    value: parquet
 - description: Prefix to use when writing batch files.
   kind: string
-  label: Batch Config Storage Prefix
+  label: Batch Storage Prefix
   name: batch_config.storage.prefix
 - description: Root path to use when writing batch files.
   kind: string
-  label: Batch Config Storage Root
+  label: Batch Storage Root
   name: batch_config.storage.root
+- description: ''
+  kind: integer
+  label: Expiry Time Buffer
+  name: expiry_time_buffer
+- description: 'One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization'
+  kind: array
+  label: Faker Locale
+  name: faker_config.locale
+- description: 'Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator'
+  kind: string
+  label: Faker Seed
+  name: faker_config.seed
 - description: "'True' to enable schema flattening and automatically expand nested
     properties."
   kind: boolean
-  label: Flattening Enabled
+  label: Enable Schema Flattening
   name: flattening_enabled
 - description: The max depth to flatten schemas.
   kind: integer
-  label: Flattening Max Depth
+  label: Max Flattening Depth
   name: flattening_max_depth
 - description: The log level of the API response metrics.
   kind: string
@@ -107,6 +127,19 @@ settings:
   kind: object
   label: Stream Maps
   name: stream_maps
+- description: Configures which states are of interest. Must be one of [open, closed,
+    all], defaults to open.
+  kind: options
+  label: Stream Options Milestones State
+  name: stream_options.milestones.state
+  options:
+  - label: Open
+    value: open
+  - label: Closed
+    value: closed
+  - label: All
+    value: all
+  value: open
 - description: ''
   kind: string
   label: User Agent

@@ -59,6 +59,14 @@ settings:
   - label: Pymssql
     value: pymssql
   value: pymssql
+- description: 'One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization'
+  kind: array
+  label: Faker Config Locale
+  name: faker_config.locale
+- description: 'Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator'
+  kind: string
+  label: Faker Config Seed
+  name: faker_config.seed
 - description: "'True' to enable schema flattening and automatically expand nested
     properties."
   kind: boolean
@@ -88,23 +96,23 @@ settings:
   name: port
 - description: 'Fast Executemany Mode: True, False'
   kind: string
-  label: Sqlalchemy Eng Params Fast Executemany
+  label: SQLAlchemy Eng Params Fast Executemany
   name: sqlalchemy_eng_params.fast_executemany
 - description: 'Run the engine in 2.0 mode: True, False'
   kind: string
-  label: Sqlalchemy Eng Params Future
+  label: SQLAlchemy Eng Params Future
   name: sqlalchemy_eng_params.future
 - description: This is a Yes No option
   kind: string
-  label: Sqlalchemy URL Query Multisubnetfailover
+  label: SQLAlchemy URL Query Multisubnetfailover
   name: sqlalchemy_url_query.MultiSubnetFailover
 - description: This is a Yes No option
   kind: string
-  label: Sqlalchemy URL Query Trustservercertificate
+  label: SQLAlchemy URL Query Trustservercertificate
   name: sqlalchemy_url_query.TrustServerCertificate
 - description: The Driver to use when connection should match the Driver Type
   kind: string
-  label: Sqlalchemy URL Query Driver
+  label: SQLAlchemy URL Query Driver
   name: sqlalchemy_url_query.driver
 - description: The earliest record date to sync
   kind: date_iso8601
